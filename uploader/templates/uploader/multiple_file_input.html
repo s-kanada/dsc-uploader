@@ -1,0 +1,3 @@
+<!-- templates/your_app/multiple_file_input.html -->
+
+<input type="file" name="{{ widget.name }}"{% if widget.attrs.multiple %} multiple{% endif %}{% include "django/forms/widgets/attrs.html" %}>

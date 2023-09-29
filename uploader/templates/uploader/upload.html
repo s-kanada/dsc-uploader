@@ -1,0 +1,13 @@
+<form method="post" enctype="multipart/form-data" id="fileUploadForm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">アップロード</button>
+</form>
+
+{% if success_message %}
+<p class="alert alert-success">{{ success_message }}</p>
+{% endif %}
+
+{% if error_message %}
+<p class="alert alert-danger">{{ error_message }}</p>
+{% endif %}
