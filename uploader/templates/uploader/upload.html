@@ -1,13 +1,31 @@
-<form method="post" enctype="multipart/form-data" id="fileUploadForm">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">アップロード</button>
-</form>
+{% extends 'uploader/base.html' %}
 
-{% if success_message %}
-<p class="alert alert-success">{{ success_message }}</p>
-{% endif %}
+{% block content %}
+<div class="content">
+    <form method="post" enctype="multipart/form-data" id="fileUploadForm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">アップロード</button>
+    </form>
 
-{% if error_message %}
-<p class="alert alert-danger">{{ error_message }}</p>
-{% endif %}
+    {% if success_message %}
+    <p class="alert alert-success" id="success-message">{{ success_message }}</p>
+    {% endif %}
+
+    {% if error_message %}
+    <p class="alert alert-danger" id="error-message">{{ error_message }}</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var form = document.getElementById("fileUploadForm");
+        form.addEventListener("submit", function(event) {
+            // フォームが送信されるときにsuccess_messageとerror_messageをクリアする
+            document.getElementById("success-message").textContent = "";
+            document.getElementById("error-message").textContent = "";
+        });
+    });
+</script>
+    
