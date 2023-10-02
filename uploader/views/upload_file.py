@@ -1,6 +1,12 @@
+"""
+Modelにデータ取得を命令
+プログラム的な処理はここに記載できる
+戻り値はtemplatesへ
+"""
+
 import requests
 from django.shortcuts import render, redirect
-from .forms import FileUploadForm
+from uploader.forms import FileUploadForm
 
 GETLIST_URL = "https://dsc0006sjp.drsum.com/api/v1.0/file/list"
 UPDFILE_URL = "https://dsc0006sjp.drsum.com/api/v1.0/file/upload"
@@ -40,4 +46,3 @@ def upload_file(request):
         form = FileUploadForm()
 
     return render(request, 'uploader/upload.html', {'form': form, 'success_message': success_message, 'error_message': error_message})
-

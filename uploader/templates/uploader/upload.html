@@ -4,7 +4,9 @@
 <div class="content">
     <form method="post" enctype="multipart/form-data" id="fileUploadForm">
         {% csrf_token %}
+        <div>
         {{ form.as_p }}
+        </div>
         <button type="submit">アップロード</button>
     </form>
 
@@ -19,6 +21,7 @@
 {% endblock %}
 
 <script>
+    //これ息してないからあとで確認や
     document.addEventListener("DOMContentLoaded", function() {
         var form = document.getElementById("fileUploadForm");
         form.addEventListener("submit", function(event) {
