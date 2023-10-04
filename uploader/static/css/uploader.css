@@ -1,22 +1,25 @@
-/*h1 a, h2 a {
-    color: #E87A90;
-    font-family: 'Pixelify Sans';
-}*/
-body {
-    font-family: "メイリオ";
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
 .pagetitle {
     color: #fff;
     font-family: 'Pixelify Sans';
-    font-size: 36pt;
+    font-size: 36px;
     text-decoration: none;
 }
 
+label {
+    font-family: 'M PLUS 1';
+    font-size: 20px;
+    margin: 10px;
+}
+
+select {
+    font-family: 'M PLUS 1';
+    font-size: 20px;
+    margin: 10px;
+}
+
 .button {
-    font-size: 15pt;
+    display: block;
+    font-size: 20px;
     padding: 5px 10px;
     background-color: #fff;
     color: #FF617D;
@@ -26,71 +29,101 @@ body {
     cursor: pointer;
 }
 
-/* ボタンにホバースタイルを追加 */
 .button:hover {
-    background-color: #f7e8eb; /* ホバー時の背景色を変更 */
+    background-color: #f7e8eb;
 }
+
+.syoribtn {
+    width: 55%;
+    display: flex;
+    justify-content: end;
+}
+
+.itembox {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.bt-logout {
+    font-family: 'M PLUS 1';
+    display: flex;
+    justify-content: end;
+}
+
 .page-header {
     color: #fff;
     font-family: 'Pixelify Sans';
-    font-size: 24pt;
+    font-size: 24px;
     background-color: #E87A90;
     margin-top: 0;
     padding: 20px 20px 20px 40px;
 }
 
-/*.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-    color: #ffffff;
-    font-size: 36pt;
-    text-decoration: none;
-}*/
-
-input {
-    font-family: "メイリオ";
-    color: #000;
+.bt-select {
+    font-size: 20px;
+    font-family: 'M PLUS 1';
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-label {
-    color: #000;
-    font-family: "メイリオ";
+.bt-select input {
+    font-size: 20px;
+    font-family: 'M PLUS 1';
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.bt-upload {
+    display: flex;
+    justify-content: center;
+    padding-left: 20px;
+}
+
+.bt-clear {
+    display: flex;
+    justify-content: center;
+    padding-left: 20px;
 }
 
 button {
-    font-family: "メイリオ";
-    color: #000;
+    font-size: 20px;
+    font-family: 'M PLUS 1';
+    color: #fff;
+    background-color: #3d92d8;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 15px;
 }
+
+.result {
+    font-family: 'M PLUS 1';
+}
+
+table {
+    width: 55%;
+    border-collapse: collapse;
+  }
+    
+  th {
+    background-color: #fca7b5;
+    color: #fff;
+    padding: 10px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #fff6f6;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #fcefef;
+  }
+  
+  td {
+    padding: 10px;
+  }  
 
 .content {
     margin-left: 40px;
 }
-/*
-h1, h2, h3, h4 {
-    font-family: 'Pixelify Sans', cursive;
-}
-
-.date {
-    color: #828282;
-}
-
-.save {
-    float: right;
-}
-
-.post-form textarea, .post-form input {
-    width: 100%;
-}
-
-.top-menu, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
-    float: right;
-    font-size: 26pt;
-    margin-right: 20px;
-}
-
-.post {
-    margin-bottom: 70px;
-}
-
-.post h2 a, .post h2 a:visited {
-    color: #000000;
-}*/

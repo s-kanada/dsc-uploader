@@ -1,9 +1,16 @@
+{% extends 'registration/base.html' %}
+{% load widget_tweaks %}
+
 {% block content %}
-  <h2>Create an Account</h2>
+<div class="title">
+  <header>Create an Account</header>
+</div>
+<div class="main">
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Sign Up</button>
   </form>
-  <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+  <div>Already have an account? <a href="{% url 'login' %}">Log in</a></div>
+</div>
 {% endblock %}

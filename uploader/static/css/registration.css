@@ -1,0 +1,34 @@
+body {
+    background-color: #eeeeee;
+    margin-top: 0;
+    padding: 40px 40px 40px 40px;
+    
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    margin: 100px;
+}
+
+.title {
+    color: #FF617D;
+    font-family: 'M PLUS 1';
+    font-size: 30pt;
+    font-weight: bold;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'M PLUS 1';
+    font-size: 20px;
+}
+
+input {
+    font-family: 'M PLUS 1';
+    font-size: 20px;
+}
+

@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
     'uploader.apps.UploaderConfig',
-    'bootstrap4',
     'widget_tweaks',
 ]
 
