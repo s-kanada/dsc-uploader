@@ -5,6 +5,10 @@
     text-decoration: none;
 }
 
+.content container {
+    font-family: M PLUS 1;
+}
+
 label {
     font-family: 'M PLUS 1';
     font-size: 20px;
@@ -82,6 +86,12 @@ select {
 .bt-clear {
     display: flex;
     justify-content: center;
+    padding-left: 20px;
+}
+
+.information {
+    font-family: 'M PLUS 1';
+    color: #e94162;
     padding-left: 20px;
 }
 

@@ -78,7 +78,7 @@ def upload_file(request):
                         error_message = f"ファイルのアップロードに失敗しました。({response.status_code} - {response.text})"
             else:
                 # フォームが無効な場合の処理
-                information = "アップロードするファイルを選択してください"
+                information = "アップロードするファイルを選択してください！"
         else:
             pass
     else:
