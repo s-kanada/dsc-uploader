@@ -7,7 +7,8 @@ Modelにデータ取得を命令
 import requests
 from django.shortcuts import render
 from uploader.forms import FileUploadForm
-
+from datetime import datetime
+import pytz
 
 GETLIST_URL = "https://dsc0006sjp.drsum.com/api/v1.0/file/list"
 UPDFILE_URL = "https://dsc0006sjp.drsum.com/api/v1.0/file/upload"
@@ -34,6 +35,12 @@ def upload_file(request):
     success_message = None
     error_message = None
     information = ""
+
+    # 初回表示時に指定のキーをクリア
+    if not request.session.get('initialized', False):
+        request.session['initialized'] = True
+        request.session.pop('file_history', None)
+
     # アップロード先フォルダを取得
     folder_names = dir_list()
     selected_folder = request.POST.get('folder_select')
@@ -55,10 +62,6 @@ def upload_file(request):
 
                 for file in uploaded_files:
                     file_name = file.name
-                    # ファイル情報をセッションに保存
-                    if 'file_history' not in request.session:
-                        request.session['file_history'] = []
-                    request.session['file_history'].append({'file_name': file_name})
                     
                     url = UPDFILE_URL
                     dest_dir = f"{DIR_PATH}{selected_folder}"
@@ -71,11 +74,41 @@ def upload_file(request):
                     response = requests.post(url, data=data, auth=auth, files=files_data)
 
                     if response.status_code in (200, 201):
+                        url = GETLIST_URL
+                        json_data = {'dir_path': dest_dir}
+
+                        response = requests.post(url, json=json_data, auth=auth)
+
+                        if response.status_code == 200:
+                            data = response.json()
+                            matching = [record for record in data if record["name"] == file_name]
+                            # matching_records の中から modified の値を取得
+                            file_time = matching[0]["modified"]
+                            # UTC時間の文字列をdatetimeオブジェクトに変換
+                            utc_time = datetime.strptime(file_time, "%Y-%m-%dT%H:%M:%S.%fZ")
+
+                            # UTCタイムゾーンを表すオブジェクトを取得
+                            utc_timezone = pytz.timezone("UTC")
+
+                            # 日本のタイムゾーンを表すオブジェクトを取得
+                            japan_timezone = pytz.timezone("Asia/Tokyo")
+
+                            # UTC時間を日本時間に変換
+                            japan_time = utc_time.replace(tzinfo=utc_timezone).astimezone(japan_timezone)
+
+                            # 日本時間の文字列に変換
+                            japan_time_str = japan_time.strftime("%Y/%m/%d %H:%M:%S")
+
                         # API呼び出しが成功した場合の処理
-                        success_message = f"ファイルのアップロードに成功しました。（アップロード先：{selected_folder}）"
+                        success_message = f"ファイルのアップロードに成功しました。"
                     else:
                         # API呼び出しが失敗した場合の処理
                         error_message = f"ファイルのアップロードに失敗しました。({response.status_code} - {response.text})"
+
+                    # ファイル情報をセッションに保存
+                    if 'file_history' not in request.session:
+                        request.session['file_history'] = []
+                    request.session['file_history'].append({'file_name': file_name, 'success_message': success_message, 'error_message': error_message, 'file_time': japan_time_str})
             else:
                 # フォームが無効な場合の処理
                 information = "アップロードするファイルを選択してください！"
@@ -84,5 +117,5 @@ def upload_file(request):
     else:
         pass
 
-    return render(request, 'uploader/upload.html', {'form': form, 'success_message': success_message, 'error_message': error_message, 'dir_list': folder_names, 'information': information})
+    return render(request, 'uploader/upload.html', {'form': form, 'dir_list': folder_names, 'information': information})
 
