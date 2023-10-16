@@ -24,12 +24,26 @@ def dir_list():
 
     response = requests.post(url, json=json_data, auth=auth)
 
-    if response.status_code == 200:
+    if response.text and response.status_code == 200:
         data = response.json()
         folder_names = [item["name"] for item in data if item["type"] == "dir"]
         return folder_names
     else:
         return []
+
+def subdir_list(selected_folder):
+    url = GETLIST_URL
+    json_data = {'dir_path': f"{DIR_PATH}{selected_folder}"}
+    auth = (USERNAME, PASSWORD)
+
+    response = requests.post(url, json=json_data, auth=auth)
+    if response.text and response.status_code == 200:
+        data = response.json()
+        subfolder = [item["name"] for item in data if item["type"] == "dir" and item["name"] != "インポート済"]
+        subfolder.insert(0, '--')
+        return subfolder
+    else:
+        return ['--']
 
 def upload_file(request):
     success_message = None
@@ -45,6 +59,11 @@ def upload_file(request):
     folder_names = dir_list()
     selected_folder = request.POST.get('folder_select')
     request.session['last_selected_folder'] = selected_folder
+    subfolders = subdir_list(selected_folder)
+    selected_subfolder = request.POST.get('subfolder_select')
+    if selected_subfolder != "--":
+        request.session['last_selected_subfolder'] = selected_subfolder
+        selected_folder = f"{selected_folder}/{selected_subfolder}"
     
     form = FileUploadForm()
 
@@ -117,5 +136,5 @@ def upload_file(request):
     else:
         pass
 
-    return render(request, 'uploader/upload.html', {'form': form, 'dir_list': folder_names, 'information': information})
+    return render(request, 'uploader/upload.html', {'form': form, 'dir_list': folder_names, 'subdir_list': subfolders, 'information': information})
 

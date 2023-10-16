@@ -15,6 +15,15 @@
                 </option>
             {% endfor %}
             </select>
+            <button type="submit" name="action" value="subsel" class="subsel">サブフォルダ選択</button>
+            <select name="subfolder_select" id="subfolder_select" class="subform-control">
+                {% for folder_name in subdir_list %}
+                <option value="{{ folder_name }}"
+                    {% if folder_name == request.session.last_selected_subfolder %} selected {% endif %}>
+                    {{ folder_name }}
+                </option>
+            {% endfor %}
+            </select>
         </div>
         <div class="bt-select"><input type="file" multiple name="file" value=""></div>
         <div class="information"><p>{{ information }}</p></div>
