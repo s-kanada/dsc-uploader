@@ -95,8 +95,7 @@ select {
     padding-left: 20px;
 }
 .subsel {
-    background-color: #c7c6c6;
-    margin: 20px;
+    display: none;
 }
 
 button {

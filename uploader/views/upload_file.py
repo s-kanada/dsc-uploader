@@ -59,6 +59,8 @@ def upload_file(request):
     folder_names = dir_list()
     selected_folder = request.POST.get('folder_select')
     request.session['last_selected_folder'] = selected_folder
+
+    # アップロード先サブフォルダを取得
     subfolders = subdir_list(selected_folder)
     selected_subfolder = request.POST.get('subfolder_select')
     if selected_subfolder != "--":

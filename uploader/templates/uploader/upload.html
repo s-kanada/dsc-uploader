@@ -24,6 +24,19 @@
                 </option>
             {% endfor %}
             </select>
+            <script>
+                // コンボボックス1の要素を取得
+                var combo1 = document.getElementById("folder_select");
+
+                // サブフォルダ選択ボタンの要素を取得
+                var subfolderButton = document.querySelector(".subsel");
+
+                // コンボボックス1が変更されたときに呼び出される関数
+                combo1.addEventListener("change", function() {
+                    // コンボボックスの値が変更されたとき、サブフォルダ選択ボタンをクリックする
+                    subfolderButton.click();
+                });
+            </script>
         </div>
         <div class="bt-select"><input type="file" multiple name="file" value=""></div>
         <div class="information"><p>{{ information }}</p></div>
