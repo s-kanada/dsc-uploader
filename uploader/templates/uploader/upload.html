@@ -25,15 +25,9 @@
             {% endfor %}
             </select>
             <script>
-                // コンボボックス1の要素を取得
-                var combo1 = document.getElementById("folder_select");
-
-                // サブフォルダ選択ボタンの要素を取得
-                var subfolderButton = document.querySelector(".subsel");
-
-                // コンボボックス1が変更されたときに呼び出される関数
-                combo1.addEventListener("change", function() {
-                    // コンボボックスの値が変更されたとき、サブフォルダ選択ボタンをクリックする
+                var combo = document.getElementById("folder_select");       //親フォルダコンボのオブジェクトを取り出す
+                var subfolderButton = document.querySelector(".subsel");    //サブフォルダ絞り込み処理ボタンのオブジェクトを取り出す
+                combo.addEventListener("change", function() {               //親フォルダコンボの値が変わったとき、絞り込み処理ボタンをクリックするようイベント設定
                     subfolderButton.click();
                 });
             </script>
@@ -41,8 +35,9 @@
         <div class="bt-select"><input type="file" multiple name="file" value=""></div>
         <div class="information"><p>{{ information }}</p></div>
         <div class="syoribtn">
-        <div class="bt-upload"><button type="submit" name="action" value="upload">アップロード</button></div>
-        <div class="bt-clear"><button type="submit" name="action" value="clear">クリア</button></div>
+        <button type="submit" name="action" value="upload" class="bt-upload">アップロード</button>
+        <button type="submit" name="action" value="check" class="bt-check">インポート確認</button>
+        <button type="submit" name="action" value="clear" class="bt-clear">クリア</button>
         </div>
     </form>
     <div class="result">
@@ -51,6 +46,7 @@
             <th>ファイル名</th>
             <th>アップロード結果</th>
             <th>アップロード時間</th>
+            <th>ファイル確認</th>
         </tr>
         {% for file_info in request.session.file_history %}
         <tr>
@@ -68,6 +64,9 @@
             </td>
             <td>
                 {{ file_info.file_time }}
+            </td>
+            <td>
+                {{ file_info.check }}
             </td>
         </tr>
         {% endfor %}    

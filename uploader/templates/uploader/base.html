@@ -4,25 +4,32 @@
         <title>Dr.Sum Uploader</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@300&family=Pixelify+Sans&display=swap" rel="stylesheet" type='text/css'>
-        <link rel="stylesheet" href="{% static 'css/uploader.css' %}">
+        <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@300&family=Autour+One" rel="stylesheet" type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/uploader.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/loading.css' %}" type="text/css">
     </head>
     <body>
-        <div class="page-header">
-            <h1><a href="/" class="pagetitle">Dr.Sum Uploader</a></h1>
-            <div class="bt-logout">
-                {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}" class="button">LOGOUT</a>
-                {% endif %}
-            </div>
-        </div>         
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                {% block content %}
-                {% endblock %}
-                </div>
-            </div>
+        <div id="splash">
+            <div id="splash_logo"><img src="{% static 'img/logo.png' %}" alt="" class="fadeUp"></div>
+            <!--/splash--></div>
+            <div id="container">
+                <div class="page-header">
+                    <h1 class="pagetitle">Dr.Sum Uploader</h1>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="bt-logout">LOGOUT</a>
+                    {% endif %}
+                </div>         
+                <div class="content container">
+                    <div class="row">
+                        <div class="col-md-8">
+                        {% block content %}
+                        {% endblock %}
+                        </div>
+                    </div>
+                </div>                
         </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="{% static 'js/loading.js' %}"></script>
     </body>
 </html>

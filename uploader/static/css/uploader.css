@@ -1,8 +1,37 @@
+body {
+    background-image: url('https://images.unsplash.com/photo-1501619951397-5ba40d0f75da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    opacity: 0.5;
+    z-index: -1;
+}
+
 .pagetitle {
-    color: #fff;
-    font-family: 'Pixelify Sans';
-    font-size: 36px;
-    text-decoration: none;
+    color: transparent;
+    font-family: 'Autour One';
+    font-size: 50px;
+    background-image: url('https://images.unsplash.com/photo-1501619951397-5ba40d0f75da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80');
+    background-size: cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.page-header {
+    opacity: 0.6;
+    margin-top: 0;
+    padding: 5px 10px 5px 20px;
+    background-size: cover;
 }
 
 .content container {
@@ -50,17 +79,12 @@ select {
 
 .bt-logout {
     font-family: 'M PLUS 1';
+    font-size: 25px;
     display: flex;
     justify-content: end;
-}
-
-.page-header {
-    color: #fff;
-    font-family: 'Pixelify Sans';
-    font-size: 24px;
-    background-color: #E87A90;
-    margin-top: 0;
-    padding: 20px 20px 20px 40px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 10px;
 }
 
 .bt-select {
@@ -78,6 +102,12 @@ select {
 }
 
 .bt-upload {
+    display: flex;
+    justify-content: center;
+    padding-left: 20px;
+}
+
+.bt-check {
     display: flex;
     justify-content: center;
     padding-left: 20px;
@@ -103,7 +133,9 @@ button {
     font-family: 'M PLUS 1';
     color: #fff;
     background-color: #3d92d8;
+    opacity: 0.7;
     margin-bottom: 20px;
+    margin-left: 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -121,16 +153,19 @@ table {
     
   th {
     background-color: #fca7b5;
+    opacity: 0.8;
     color: #fff;
     padding: 10px;
   }
   
   tr:nth-child(even) {
     background-color: #fff6f6;
+    opacity: 0.8;
   }
   
   tr:nth-child(odd) {
     background-color: #fcefef;
+    opacity: 0.8;
   }
   
   td {

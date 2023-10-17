@@ -129,10 +129,30 @@ def upload_file(request):
                     # ファイル情報をセッションに保存
                     if 'file_history' not in request.session:
                         request.session['file_history'] = []
-                    request.session['file_history'].append({'file_name': file_name, 'success_message': success_message, 'error_message': error_message, 'file_time': japan_time_str})
+                    request.session['file_history'].append({'file_name': file_name, 'file_path': dest_dir, 'success_message': success_message, 'error_message': error_message, 'file_time': japan_time_str})
             else:
                 # フォームが無効な場合の処理
                 information = "アップロードするファイルを選択してください！"
+        elif 'action' in request.POST and request.POST['action'] == 'check':
+            file_history = request.session.get('file_history', [])
+            url = GETLIST_URL
+            auth = (USERNAME, PASSWORD)
+
+            for file_info in file_history:
+                if file_info.get('check') != "インポート完了":
+                    file_path = file_info.get('file_path')
+                    file_name = file_info.get('file_name')
+
+                    json_data = {'dir_path': f"{file_path}"}
+                    response = requests.post(url, json=json_data, auth=auth)
+                    if response.text and response.status_code == 200:
+                        data = response.json()
+                        if file_name not in [item["name"] for item in data if item["type"] == "file"]:
+                            file_info['check'] = "インポート完了"
+                        else:
+                            file_info['check'] = "インポート中"
+
+            request.session['file_history'] = file_history
         else:
             pass
     else:
